@@ -3,7 +3,11 @@ import type { Capabilities } from "./Capabilities.js";
 import type { SignatureEnvelope } from "../model/SignatureEnvelope.js";
 import type { VerificationResult } from "../model/VerificationResult.js";
 import type { ExecutionStep } from "../model/ExecutionStep.js";
+import type { SignatureEntry } from "../model/SignatureEntry.js";
 import { Policy } from "../policy/Policy.js";
+
+import { ClassicalSigner } from "../adapters/ClassicalSigner.js";
+import { PostQuantumSigner } from "../adapters/PostQuantumSigner.js";
 
 export class UnfractaSDK {
 
@@ -16,7 +20,7 @@ export class UnfractaSDK {
   sign(payload: Uint8Array, policy: Policy): SignatureEnvelope {
     const plan = PolicyEngine.plan(policy, this.capabilities);
 
-    const signatures = [];
+    const signatures: SignatureEntry[] = [];
     const executionLog: ExecutionStep[] = [...plan.log];
 
     if (plan.doClassical) {
@@ -42,11 +46,13 @@ export class UnfractaSDK {
   }
 
   verify(payload: Uint8Array, envelope: SignatureEnvelope): VerificationResult {
-    const verificationLog: ExecutionStep[] = [{
-      step: "verification_started",
-      outcome: "success",
-      reason: `Verifying envelope created under policy '${envelope.policy}'.`
-    }];
+    const verificationLog: ExecutionStep[] = [
+      {
+        step: "verification_started",
+        outcome: "success",
+        reason: `Verifying envelope created under policy '${envelope.policy}'.`
+      }
+    ];
 
     for (const sig of envelope.signatures) {
       if (this.verifyWithAdapter(sig, payload, verificationLog)) {
@@ -78,15 +84,15 @@ export class UnfractaSDK {
   }
 
   private verifyWithAdapter(
-    sig: any,
+    sig: SignatureEntry,
     payload: Uint8Array,
     log: ExecutionStep[]
   ): boolean {
-    // stubbed for now — adapters decide
+    // Stubbed for now — concrete verification is adapter-specific
     log.push({
       step: "verification_attempt",
       outcome: "skipped",
-      reason: "Verification adapter not yet implemented."
+      reason: `Verification adapter for '${sig.algorithm_identifier}' not yet implemented.`
     });
 
     return false;
