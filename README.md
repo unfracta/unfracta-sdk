@@ -2,7 +2,7 @@
 
 Unfracta is a **policy-driven cryptographic signing SDK** that enables **continuity of trust across pre- and post-quantum environments**.
 
-Unfracta is designed to manage the **transition** to post-quantum cryptography safely.
+Unfracta is designed to manage the **transition** to post-quantum cryptography in real-world systems..
 It does not force premature algorithm choices and does not break legacy verification environments.
 
 Instead, Unfracta introduces a policy-driven execution model that allows systems to:
@@ -85,8 +85,8 @@ The repository includes a CLI demo that exercises the SDK across:
 - Hybrid environments
 - PQ-preferred policies with fallback
 
-Location: src/demo/runDemo.ts
-
+Location: 
+src/demo/runDemo.ts
 
 ## Quickstart (dev)
 
