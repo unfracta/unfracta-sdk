@@ -9,6 +9,8 @@ import { Policy } from "../policy/Policy.js";
 import { ClassicalSigner } from "../adapters/ClassicalSigner.js";
 import { PostQuantumSigner } from "../adapters/PostQuantumSigner.js";
 
+type VerificationOutcome = "verified" | "unsupported" | "unimplemented";
+
 export class UnfractaSDK {
 
   constructor(
@@ -55,7 +57,9 @@ export class UnfractaSDK {
     ];
 
     for (const sig of envelope.signatures) {
-      if (this.verifyWithAdapter(sig, payload, verificationLog)) {
+      const outcome = this.verifyWithAdapter(sig, payload, verificationLog);
+
+      if (outcome === "verified") {
         verificationLog.push({
           step: "verification_decision",
           outcome: "success",
@@ -73,7 +77,7 @@ export class UnfractaSDK {
     verificationLog.push({
       step: "verification_decision",
       outcome: "failure",
-      reason: "No signature could be verified in this environment."
+      reason: "No verifiable signature available in this environment."
     });
 
     return {
@@ -87,14 +91,50 @@ export class UnfractaSDK {
     sig: SignatureEntry,
     payload: Uint8Array,
     log: ExecutionStep[]
-  ): boolean {
-    // Stubbed for now — concrete verification is adapter-specific
+  ): VerificationOutcome {
+
+    if (sig.algorithm_family === "classical") {
+      if (!this.capabilities.classicalSupported) {
+        log.push({
+          step: "verification_attempt",
+          outcome: "unsupported",
+          reason: "Classical verification not supported in this environment."
+        });
+        return "unsupported";
+      }
+
+      log.push({
+        step: "verification_attempt",
+        outcome: "unimplemented",
+        reason: "Classical verification adapter not yet implemented."
+      });
+      return "unimplemented";
+    }
+
+    if (sig.algorithm_family === "post_quantum") {
+      if (!this.capabilities.postQuantumSupported) {
+        log.push({
+          step: "verification_attempt",
+          outcome: "unsupported",
+          reason: "Post-quantum verification not supported in this environment."
+        });
+        return "unsupported";
+      }
+
+      log.push({
+        step: "verification_attempt",
+        outcome: "unimplemented",
+        reason: "Post-quantum verification adapter not yet implemented."
+      });
+      return "unimplemented";
+    }
+
     log.push({
       step: "verification_attempt",
-      outcome: "skipped",
-      reason: `Verification adapter for '${sig.algorithm_identifier}' not yet implemented.`
+      outcome: "failure",
+      reason: `Unknown algorithm family '${sig.algorithm_family}'.`
     });
 
-    return false;
+    return "unsupported";
   }
 }
