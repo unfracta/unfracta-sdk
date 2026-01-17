@@ -1,0 +1,17 @@
+{
+  "name": "unfracta-sdk",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Policy-driven signing SDK for continuity of trust across pre- and post-quantum environments.",
+  "license": "UNLICENSED",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "demo": "node dist/demo/runDemo.js",
+    "test": "node --test dist/tests/policyEngine.test.js"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "@types/node": "^22.0.0"
+  }
+}
