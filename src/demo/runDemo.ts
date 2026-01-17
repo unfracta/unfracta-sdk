@@ -1,6 +1,7 @@
 import { UnfractaSDK } from "../core/UnfractaSDK.js";
 import { Policy } from "../policy/Policy.js";
-import { ClassicalSigner } from "../adapters/ClassicalSigner.js";
+
+import { ClassicalECDSA } from "../adapters/ClassicalECDSA.js"; // ✅ real adapter
 import { PostQuantumSigner } from "../adapters/PostQuantumSigner.js";
 
 import type { Capabilities } from "../core/Capabilities.js";
@@ -27,16 +28,23 @@ const hybridCapabilities: Capabilities = {
   postQuantumSupported: true
 };
 
+/**
+ * Adapters
+ * One real classical adapter shared across environments
+ */
+const classical = new ClassicalECDSA();
+const postQuantum = new PostQuantumSigner(); // still mocked
+
 const legacyEnv = new UnfractaSDK(
   legacyCapabilities,
-  new ClassicalSigner(),
-  new PostQuantumSigner()
+  classical,
+  postQuantum
 );
 
 const hybridEnv = new UnfractaSDK(
   hybridCapabilities,
-  new ClassicalSigner(),
-  new PostQuantumSigner()
+  classical,
+  postQuantum
 );
 
 // For MVP, PQ-capable verifier == hybrid verifier
