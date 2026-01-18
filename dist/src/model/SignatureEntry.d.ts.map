@@ -1,0 +1,1 @@
+{"version":3,"file":"SignatureEntry.d.ts","sourceRoot":"","sources":["../../../src/model/SignatureEntry.ts"],"names":[],"mappings":"AAAA,MAAM,MAAM,eAAe,GAAG,WAAW,GAAG,cAAc,CAAC;AAE3D,MAAM,WAAW,cAAc;IAC7B,gBAAgB,EAAE,eAAe,CAAC;IAClC,oBAAoB,EAAE,MAAM,CAAC;IAC7B,eAAe,EAAE,UAAU,CAAC;CAC7B"}
