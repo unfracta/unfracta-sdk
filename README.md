@@ -1,94 +1,153 @@
-# unfracta-sdk
+# Unfracta SDK
 
-Unfracta is a **policy-driven cryptographic signing SDK** that enables **continuity of trust across pre- and post-quantum environments**.
+**Policy-driven cryptographic signing for the post-quantum transition.**
 
-Unfracta is designed to manage the **transition** to post-quantum cryptography in real-world systems..
-It does not force premature algorithm choices and does not break legacy verification environments.
+Unfracta is a policy-driven cryptographic signing SDK designed to preserve **continuity of trust** across **classical, hybrid, and post-quantum environments**.
 
-Instead, Unfracta introduces a policy-driven execution model that allows systems to:
-- Continue using classical cryptography
-- Introduce post-quantum signatures when available
-- Transition seamlessly between the two without trust discontinuities
+It enables systems to transition to post-quantum cryptography **gradually and safely**, without breaking existing verifiers, re-signing historical data, or making premature algorithm commitments.
 
-This repository is intentionally **SDK-first**:
-- Developers choose **policy**, not cryptographic algorithms
-- The same interface works across **legacy**, **hybrid**, and **post-quantum** environments
-- Unfracta is infrastructure (not a wallet, not a UI product, not a crypto toolkit)
+Unfracta is **infrastructure** — not a wallet, not a UI, and not a cryptographic toolkit.
+
+---
 
 ## Why Unfracta exists
 
-Most systems will not transition to post-quantum cryptography in a single step.
+Most real-world systems cannot move to post-quantum cryptography in a single step.
 
-Real-world environments contain:
-- Legacy verifiers that cannot process PQ signatures
-- Hybrid environments with mixed capabilities
-- Gradual, policy-driven migrations rather than “flag days”
+In practice, environments contain:
 
-Unfracta addresses this reality by separating **policy**, **capability**, and **cryptographic execution**.
+- Legacy verifiers that cannot process post-quantum signatures  
+- Mixed or partially upgraded runtimes  
+- Long-lived signatures that must remain verifiable for years  
+- Incremental, policy-driven migrations rather than “flag-day” cutovers  
 
-## Core principles
+Existing cryptographic libraries focus on **algorithms**.  
+**Unfracta focuses on transition.**
 
-- **Policy-driven** — Signing behaviour is dictated by explicit policy
-- **Capability-aware** — Execution adapts to what the environment supports
-- **Continuity-first** — Classical cryptography remains a first-class baseline
-- **Explainable** — Every decision is logged and auditable
-- **Algorithm-agnostic** — No hard dependency on specific PQ schemes
+It separates **policy**, **capability**, and **cryptographic execution**, allowing systems to evolve without trust discontinuities.
+
+---
+
+## What Unfracta is
+
+- A **policy-driven signing orchestration layer**
+- A **capability-aware execution engine**
+- A **deterministic, auditable decision system**
+- A **stable SDK interface** spanning classical → hybrid → post-quantum futures
+
+Developers express **intent**, not cryptographic mechanics.
+
+---
+
+## What Unfracta is not
+
+- Not a wallet  
+- Not a key manager  
+- Not a UI or end-user product  
+- Not a low-level cryptography library  
+- Not a standards or compliance framework  
+
+These concerns deliberately sit **outside** the SDK.
+
+---
+
+## Core design principles
+
+### 1. Policy over algorithms
+
+Developers choose **policy**, not cryptographic primitives.  
+The SDK decides how to fulfil that policy based on environment capabilities.
+
+### 2. Capability-aware execution
+
+Unfracta never attempts an operation the runtime cannot safely support.
+
+### 3. Continuity first
+
+Classical cryptography remains a **first-class baseline**, not a deprecated path.
+
+### 4. Deterministic behaviour
+
+The same inputs always produce the same execution plan.
+
+### 5. Explainability
+
+Every decision is logged, inspectable, and auditable.
+
+### 6. Algorithm agnosticism
+
+No hard dependency on any specific post-quantum scheme.
+
+---
 
 ## Supported policies
 
-- `LEGACY_REQUIRED` — Classical signatures only
-- `HYBRID_PREFERRED` — Classical and post-quantum when available
-- `PQ_PREFERRED` — Post-quantum preferred, with classical fallback
+Unfracta currently supports the following signing policies:
 
-Policies are enforced centrally and cannot be bypassed.
+### `LEGACY_REQUIRED`
+Classical signatures only.
 
-## Source of truth
+### `HYBRID_PREFERRED`
+Classical + post-quantum signatures when supported.
 
-The `/docs` folder is authoritative. Implementation must conform to:
-- Doctrine
-- Policy model
-- MVP scope and non-goals
-- Demo script
-- SDK interface and signature metadata contract
+### `PQ_PREFERRED`
+Post-quantum signatures preferred, with classical fallback.
 
-## MVP goal
+Policies are enforced **centrally** and cannot be bypassed by adapters or callers.
 
-Demonstrate, end-to-end:
-1. Legacy support
-2. Post-quantum support
-3. **Seamless transition** between the two (no re-signing, no re-platforming)
+---
 
-## What this SDK does today
+## How Unfracta works (conceptually)
 
-- Policy-driven signing orchestration
-- Classical and post-quantum adapter abstraction
-- Explicit verification semantics
-- Audit-grade execution and verification logs
-- SDK-level contract tests
-- Executable demo harness
+1. The application declares a signing policy  
+2. The runtime declares its cryptographic capabilities  
+3. The policy engine derives a deterministic execution plan  
+4. Signer adapters execute the plan  
+5. Results and decisions are captured in an **audit-grade envelope**
 
-All cryptographic implementations are **intentionally mocked** at this stage.
+This separation allows the SDK to evolve without breaking applications.
+
+---
+
+## What this SDK does today (MVP)
+
+- Policy-driven signing orchestration  
+- Classical and post-quantum adapter abstraction  
+- Explicit signing and verification semantics  
+- Deterministic execution planning  
+- Audit-grade execution and verification logs  
+- SDK-level contract tests  
+- Executable demo harness  
+
+**Note:** All cryptographic implementations are intentionally mocked in the MVP.
+
+---
 
 ## What this SDK does not do (yet)
 
-- Implement real cryptographic algorithms
-- Perform cryptographic verification
-- Manage keys, identities, or wallets
-- Enforce standards or compliance regimes
+- Implement real cryptographic algorithms  
+- Perform cryptographic verification  
+- Manage keys, identities, or wallets  
+- Enforce standards, profiles, or compliance regimes  
 
-These are deliberate non-goals for the MVP.
+These are **deliberate non-goals** for the MVP.
+
+---
 
 ## Demo harness
 
-The repository includes a CLI demo that exercises the SDK across:
-- Legacy-only environments
-- Hybrid environments
-- PQ-preferred policies with fallback
+The repository includes a runnable demo that exercises the SDK across:
 
-Location: 
-src/demo/runDemo.ts
+- Legacy-only environments  
+- Hybrid environments  
+- Post-quantum-preferred policies with fallback  
 
-## Quickstart (dev)
+**Location:**  
+`src/demo/runDemo.ts`
+
+---
+
+## Quick start (development)
 
 ```bash
 npm install
