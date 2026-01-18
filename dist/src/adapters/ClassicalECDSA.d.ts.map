@@ -1,1 +1,0 @@
-{"version":3,"file":"ClassicalECDSA.d.ts","sourceRoot":"","sources":["../../../src/adapters/ClassicalECDSA.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAE,MAAM,mBAAmB,CAAC;AAC3C,OAAO,KAAK,EAAE,cAAc,EAAE,MAAM,2BAA2B,CAAC;AAEhE,qBAAa,cAAe,YAAW,MAAM;IAC3C,IAAI,CAAC,QAAQ,EAAE,cAAc,EAAE,OAAO,EAAE,UAAU,GAAG,UAAU;CAGhE"}

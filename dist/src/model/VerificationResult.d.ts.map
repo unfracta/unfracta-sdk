@@ -1,1 +1,0 @@
-{"version":3,"file":"VerificationResult.d.ts","sourceRoot":"","sources":["../../../src/model/VerificationResult.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,aAAa,EAAE,MAAM,oBAAoB,CAAC;AAExD,MAAM,WAAW,kBAAkB;IACjC,KAAK,EAAE,OAAO,CAAC;IACf,aAAa,EAAE,MAAM,CAAC;IACtB,gBAAgB,EAAE,aAAa,EAAE,CAAC;CACnC"}
