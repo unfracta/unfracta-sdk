@@ -2,6 +2,7 @@ import { PolicyResolver } from "./PolicyResolver.js";
 import { Signer } from "./Signer.js";
 import { SigningContext } from "./types.js";
 import { Plan } from "../model/Plan.js";
+import { Capabilities } from "../model/Capabilities.js";
 
 export class UnfractaSDK {
   constructor(
@@ -37,6 +38,14 @@ export class UnfractaSDK {
       plan,
       explanation,
       rationale: plan.reasons
+    };
+  }
+
+  capabilities(): Capabilities {
+    return {
+      signingPaths: ["classical"],
+      supportsHybrid: false,
+      supportsPostQuantum: false
     };
   }
 }
