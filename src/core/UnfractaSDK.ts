@@ -10,8 +10,8 @@ export class UnfractaSDK {
   ) {}
 
   sign(context: SigningContext, payload: Uint8Array): Uint8Array {
-    const profile = this.policyResolver.resolve(context);
-    return this.signer.sign(profile, payload);
+    const plan = this.plan(context);
+    return this.signer.sign(plan.policy, payload);
   }
 
   plan(context: SigningContext): Plan {
