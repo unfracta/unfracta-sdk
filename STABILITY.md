@@ -1,59 +1,76 @@
-# Stability and API contracts
+# Unfracta SDK — Stability Guarantees
 
-This repository is the Unfracta SDK MVP (`v0.1.0-mvp`).
+This document defines the public stability contract of the Unfracta SDK.
 
-The project aims to be easy to adopt and safe to integrate. To achieve that, we separate:
+## Stability Philosophy
 
-- Contractual principles (stable)
-- Public API surface (stabilising)
-- Internal implementation (free to evolve)
+Unfracta prioritises:
+- deterministic behaviour
+- explicit policy-driven execution
+- forward-compatible design
 
-## Contractual principles (will not change)
+Public APIs are versioned deliberately. Breaking changes are rare, documented, and gated by major version bumps.
 
-These are architectural commitments:
+---
 
-- Policy-driven behaviour (intent over algorithms)
-- Capability-aware execution (never attempt unsupported operations)
-- Continuity-first (classical support remains first-class)
-- Deterministic planning (same inputs produce the same plan)
-- Explainable execution (audit-grade logs for decisions)
+## Stable Public API (v1)
 
-## Public API stability (what to expect)
+The following interfaces are considered **stable** and will not change in a backward-incompatible way within the v1 series:
 
-During `0.x` versions:
+### Core SDK
 
-- Public APIs may change with minor versions
-- Changes will be documented in release notes
-- Breaking changes will be intentional and explicit
+- `UnfractaSDK`
+  - `plan(context: SigningContext): Plan`
+  - `sign(payload: Uint8Array, context: SigningContext): SignatureEnvelope`
+  - `explain(context: SigningContext): { summary: string; details: string[] }`
 
-Once `1.0.0` is reached:
+### Models
 
-- Public APIs follow semantic versioning
-- Breaking changes only in major versions
+- `SignatureEnvelope`
+- `Plan`
+- `Policy`
 
-## What is considered public API
+These types form the contractual boundary between Unfracta and its consumers.
 
-Public API includes:
+---
 
-- `src/core/*` exported types and classes
-- Policy identifiers and policy semantics
-- Signature envelope and metadata fields exposed to callers
+## Conditionally Stable
 
-If you depend on behaviour outside these areas, consider it internal.
+The following areas may evolve as the SDK matures, but will remain backward-compatible where possible:
 
-## What is explicitly not stable yet
+- Execution log structure
+- Signature payload shapes
+- Capability detection logic
 
-These may change freely in `0.x`:
+---
 
-- Adapter interfaces and naming
-- Demo harness structure
-- Logging field names (until locked)
-- Folder layout under `src/` (except public exports)
+## Internal / Experimental
 
-## How to propose changes
+The following are considered internal implementation details and may change at any time:
 
-Please open an issue or PR describing:
+- `PolicyEngine`
+- `PolicyResolver`
+- `Signer`
+- Capability providers
+- Demo code
 
-- the problem you are solving,
-- the affected contract area,
-- migration impact and a suggested transition plan.
+Consumers should not rely on these directly.
+
+---
+
+## Versioning
+
+- Patch versions may fix bugs or improve performance.
+- Minor versions may add new capabilities.
+- Major versions may introduce breaking changes, with migration guidance.
+
+---
+
+## Determinism Guarantee
+
+Given the same:
+- `SigningContext`
+- runtime capabilities
+- SDK version
+
+Unfracta guarantees identical planning decisions and execution behaviour.
