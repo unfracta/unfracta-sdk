@@ -1,3 +1,4 @@
+import type { SignatureEnvelope } from "../model/SignatureEnvelope.js";
 import type { SigningContext } from "./types.js";
 import type { Plan } from "../model/Plan.js";
 
@@ -34,7 +35,7 @@ export class UnfractaSDK {
   /**
    * Execute signing according to the execution plan.
    */
-  sign(payload: Uint8Array, context: SigningContext) {
+  sign(payload: Uint8Array, context: SigningContext): SignatureEnvelope {
     const plan = this.plan(context);
     const execution = plan.execution;
 
@@ -55,8 +56,11 @@ export class UnfractaSDK {
     }
 
     return {
+      version: "v1",
+      policy: plan.policy,
+      execution,
       signatures,
-      log: execution.log
+      createdAt: new Date().toISOString()
     };
   }
 
