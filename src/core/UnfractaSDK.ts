@@ -33,10 +33,6 @@ export class UnfractaSDK {
 
   /**
    * Execute signing according to the execution plan.
-   *
-   * For MVP:
-   * - Classical signing is mandatory
-   * - Post-quantum signing is optional
    */
   sign(payload: Uint8Array, context: SigningContext) {
     const plan = this.plan(context);
@@ -61,6 +57,36 @@ export class UnfractaSDK {
     return {
       signatures,
       log: execution.log
+    };
+  }
+
+  /**
+   * Explain the execution decision in human-readable terms.
+   */
+  explain(context: SigningContext) {
+    const plan = this.plan(context);
+    const execution = plan.execution;
+
+    const details = execution.log.map(entry => {
+      switch (entry.outcome) {
+        case "success":
+          return `✓ ${entry.reason}`;
+        case "unsupported":
+          return `⚠ ${entry.reason}`;
+        case "failure":
+          return `✗ ${entry.reason}`;
+        default:
+          return entry.reason;
+      }
+    });
+
+    const summary = execution.doPostQuantum
+      ? "Classical and post-quantum signing will be executed."
+      : "Classical signing will be executed.";
+
+    return {
+      summary,
+      details
     };
   }
 }

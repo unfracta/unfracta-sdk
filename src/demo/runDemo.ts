@@ -10,11 +10,14 @@ const context: SigningContext = {
   environment: "test"
 };
 
-// Initialise SDK
 const sdk = new UnfractaSDK();
 
-// Execute signing
 const result = sdk.sign(payload, context);
+const explanation = sdk.explain(context);
 
 console.log("Signing result:");
 console.log(JSON.stringify(result, null, 2));
+
+console.log("\nExplanation:");
+console.log(explanation.summary);
+explanation.details.forEach(line => console.log(line));
