@@ -1,6 +1,8 @@
 import { PolicyResolver } from "./PolicyResolver.js";
 import { Signer } from "./Signer.js";
 import { SigningContext } from "./types.js";
+import { Plan } from "../model/Plan.js";
+import { Capabilities } from "../model/Capabilities.js";
 
 export class UnfractaSDK {
   constructor(
@@ -9,7 +11,41 @@ export class UnfractaSDK {
   ) {}
 
   sign(context: SigningContext, payload: Uint8Array): Uint8Array {
-    const profile = this.policyResolver.resolve(context);
-    return this.signer.sign(profile, payload);
+    const plan = this.plan(context);
+    return this.signer.sign(plan.policy, payload);
+  }
+
+  plan(context: SigningContext): Plan {
+    const policy = this.policyResolver.resolve(context);
+
+    return {
+      policy,
+      paths: ["classical"],
+      reasons: {
+        classical: "Default MVP signing path"
+      }
+    };
+  }
+
+  explain(context: SigningContext) {
+    const plan = this.plan(context);
+
+    const explanation =
+      `Signing policy resolved to "${plan.policy}". ` +
+      `Planned signing paths: ${plan.paths.join(", ")}.`;
+
+    return {
+      plan,
+      explanation,
+      rationale: plan.reasons
+    };
+  }
+
+  capabilities(): Capabilities {
+    return {
+      signingPaths: ["classical"],
+      supportsHybrid: false,
+      supportsPostQuantum: false
+    };
   }
 }

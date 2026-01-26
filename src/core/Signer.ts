@@ -1,5 +1,8 @@
-import { SigningProfile } from "./SigningProfile.js";
+import { SigningAdapter } from "./adapters/SigningAdapter.js";
 
-export interface Signer {
-  sign(profile: SigningProfile, payload: Uint8Array): Uint8Array;
-}
+/**
+ * @deprecated Use SigningAdapter instead.
+ *
+ * Signer is kept as an alias for backward compatibility.
+ */
+export type Signer = SigningAdapter;
