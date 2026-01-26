@@ -1,41 +1,20 @@
 import { UnfractaSDK } from "../core/UnfractaSDK.js";
-import { DefaultPolicyResolver } from "../policy/DefaultPolicyResolver.js";
-import { ClassicalECDSA } from "../adapters/ClassicalECDSA.js";
-import { SigningProfile } from "../core/SigningProfile.js";
-import { SigningContext, SigningMode } from "../core/types.js";
+import type { SigningContext } from "../core/types.js";
 
-// ---- Setup ----
+// Example payload
+const payload = new Uint8Array([1, 2, 3, 4]);
 
-// Define a signing profile (policy intent)
-const defaultProfile: SigningProfile = {
-  algorithm: "ECDSA_P256",
-  mode: SigningMode.SIGN,
-  keyRef: "demo-key-1"
-};
-
-// Create resolver + signer
-const policyResolver = new DefaultPolicyResolver(defaultProfile);
-const signer = new ClassicalECDSA();
-
-// Create SDK
-const sdk = new UnfractaSDK(policyResolver, signer);
-
-// ---- Demo payload ----
-
-const payload = new TextEncoder().encode("Hello from Unfracta");
-
-// Optional signing context (metadata only)
+// Example signing context
 const context: SigningContext = {
-  application: "demo",
-  environment: "local",
-  purpose: "example-signing"
+  application: "demo-app",
+  environment: "test"
 };
 
-// ---- Sign ----
+// Initialise SDK
+const sdk = new UnfractaSDK();
 
-const signature = sdk.sign(context, payload);
+// Execute signing
+const result = sdk.sign(payload, context);
 
-// ---- Output ----
-
-console.log("Payload:", payload);
-console.log("Signature:", signature);
+console.log("Signing result:");
+console.log(JSON.stringify(result, null, 2));

@@ -1,51 +1,66 @@
+import type { SigningContext } from "./types.js";
+import type { Plan } from "../model/Plan.js";
+
+import { PolicyEngine } from "./PolicyEngine.js";
 import { PolicyResolver } from "./PolicyResolver.js";
 import { Signer } from "./Signer.js";
-import { SigningContext } from "./types.js";
-import { Plan } from "../model/Plan.js";
-import { Capabilities } from "../model/Capabilities.js";
 
 export class UnfractaSDK {
-  constructor(
-    private readonly policyResolver: PolicyResolver,
-    private readonly signer: Signer
-  ) {}
+  private readonly policyResolver: PolicyResolver;
+  private readonly signer: Signer;
 
-  sign(context: SigningContext, payload: Uint8Array): Uint8Array {
-    const plan = this.plan(context);
-    return this.signer.sign(plan.policy, payload);
+  constructor() {
+    this.policyResolver = new PolicyResolver();
+    this.signer = new Signer();
   }
 
+  /**
+   * Produce a deterministic signing plan from context.
+   */
   plan(context: SigningContext): Plan {
-    const policy = this.policyResolver.resolve(context);
+    const signingProfile = this.policyResolver.resolve(context);
+
+    const execution = PolicyEngine.plan(signingProfile.policy, {
+      classicalSupported: true,
+      postQuantumSupported: false
+    });
 
     return {
-      policy,
-      paths: ["classical"],
-      reasons: {
-        classical: "Default MVP signing path"
-      }
+      policy: signingProfile.policy,
+      execution
     };
   }
 
-  explain(context: SigningContext) {
+  /**
+   * Execute signing according to the execution plan.
+   *
+   * For MVP:
+   * - Classical signing is mandatory
+   * - Post-quantum signing is optional
+   */
+  sign(payload: Uint8Array, context: SigningContext) {
     const plan = this.plan(context);
+    const execution = plan.execution;
 
-    const explanation =
-      `Signing policy resolved to "${plan.policy}". ` +
-      `Planned signing paths: ${plan.paths.join(", ")}.`;
+    const signatures: Record<string, unknown> = {};
+
+    if (execution.doClassical) {
+      signatures.classical = this.signer.sign(
+        { kind: "classical", policy: plan.policy },
+        payload
+      );
+    }
+
+    if (execution.doPostQuantum) {
+      signatures.postQuantum = this.signer.sign(
+        { kind: "post_quantum", policy: plan.policy },
+        payload
+      );
+    }
 
     return {
-      plan,
-      explanation,
-      rationale: plan.reasons
-    };
-  }
-
-  capabilities(): Capabilities {
-    return {
-      signingPaths: ["classical"],
-      supportsHybrid: false,
-      supportsPostQuantum: false
+      signatures,
+      log: execution.log
     };
   }
 }

@@ -1,6 +1,15 @@
-import { SigningContext } from "./types.js";
-import { SigningProfile } from "./SigningProfile.js";
+import type { SigningContext } from "./types.js";
+import type { SigningProfile } from "./SigningProfile.js";
+import { Policy } from "../policy/Policy.js";
 
-export interface PolicyResolver {
-  resolve(context: SigningContext): SigningProfile;
+export class PolicyResolver {
+  resolve(_context: SigningContext): SigningProfile {
+    // MVP: deterministic default policy
+    const policy = Policy.LEGACY_REQUIRED;
+
+    return {
+      kind: "classical",
+      policy
+    };
+  }
 }

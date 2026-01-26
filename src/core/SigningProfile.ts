@@ -1,7 +1,6 @@
-import { SigningMode } from "./types.js";
+import type { Policy } from "../policy/Policy.js";
 
 export interface SigningProfile {
-  algorithm: string;
-  mode: SigningMode;
-  keyRef: string;
+  kind: "classical" | "post_quantum" | "hybrid";
+  policy: Policy;
 }

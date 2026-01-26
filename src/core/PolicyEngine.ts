@@ -1,5 +1,5 @@
 import { Policy } from "../policy/Policy.js";
-import type { Capabilities } from "./Capabilities.js";
+import type { RuntimeCapabilities } from "./RuntimeCapabilities.js";
 import type { ExecutionStep } from "../model/ExecutionStep.js";
 
 export type ExecutionPlan = {
@@ -9,7 +9,7 @@ export type ExecutionPlan = {
 };
 
 export class PolicyEngine {
-  static plan(policy: Policy, caps: Capabilities): ExecutionPlan {
+  static plan(policy: Policy, caps: RuntimeCapabilities): ExecutionPlan {
     const log: ExecutionStep[] = [];
 
     // 1. Record policy intent

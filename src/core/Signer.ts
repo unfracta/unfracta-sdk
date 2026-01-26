@@ -1,8 +1,11 @@
-import { SigningAdapter } from "./adapters/SigningAdapter.js";
+import type { SigningProfile } from "./SigningProfile.js";
 
-/**
- * @deprecated Use SigningAdapter instead.
- *
- * Signer is kept as an alias for backward compatibility.
- */
-export type Signer = SigningAdapter;
+export class Signer {
+  sign(profile: SigningProfile, payload: Uint8Array) {
+    // MVP placeholder implementation
+    return {
+      algorithm: profile.kind,
+      signature: payload
+    };
+  }
+}

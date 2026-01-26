@@ -1,4 +1,4 @@
-export interface Capabilities {
+export interface RuntimeCapabilities {
   classicalSupported: boolean;
   postQuantumSupported: boolean;
 }
