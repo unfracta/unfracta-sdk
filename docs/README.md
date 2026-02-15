@@ -9,6 +9,7 @@ materials in this repository.
 - `02_POLICY_MODEL.md` — Canonical policy definitions and behavior.
 - `05_SDK_CONTRACT.md` — Public SDK interface and envelope contract.
 - `API.md` — Reference view of the public API surface.
+- `TECHNICAL_AUDIT.md` — Capability audit with evidence pointers.
 
 ## Supporting references
 
