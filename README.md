@@ -1,5 +1,7 @@
 # Unfracta SDK
 
+[![CI](https://github.com/unfracta/unfracta-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/unfracta/unfracta-sdk/actions/workflows/ci.yml)
+
 **Policy-driven cryptographic signing for the post-quantum transition.**
 
 Unfracta is a policy-driven cryptographic signing SDK designed to preserve **continuity of trust** across **classical, hybrid, and post-quantum environments**.
@@ -152,6 +154,8 @@ The repository includes a runnable demo that exercises the SDK across:
 ---
 
 ## Quick start (development)
+
+Prerequisites: Node 22+ (see `.nvmrc`).
 
 ```bash
 npm install

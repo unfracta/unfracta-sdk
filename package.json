@@ -5,6 +5,9 @@
   "type": "module",
   "description": "Policy-driven signing SDK for continuity of trust across pre- and post-quantum environments.",
   "license": "UNLICENSED",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "demo": "npm run build && node dist/demo/runDemo.js",
