@@ -1,0 +1,11 @@
+{
+  "name": "unfracta-hello-service",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node index.mjs"
+  },
+  "dependencies": {
+    "unfracta-sdk": "file:../.."
+  }
+}

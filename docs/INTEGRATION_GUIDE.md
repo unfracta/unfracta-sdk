@@ -47,11 +47,10 @@ If the native backend is not available:
 - `PQ_PREFERRED` falls back to classical
 - `PQ_REQUIRED` fails closed (no signing path)
 
-## Minimal usage (in-repo)
+## Minimal usage (package import)
 
 ```js
-import { UnfractaSDK } from "./dist/core/UnfractaSDK.js";
-import { Policy } from "./dist/policy/Policy.js";
+import { UnfractaSDK, Policy } from "unfracta-sdk";
 
 const sdk = new UnfractaSDK();
 const encoder = new TextEncoder();
@@ -72,6 +71,12 @@ const explanation = sdk.explain(context);
 console.log("plan:", envelope.execution);
 console.log("verify:", verification.valid, verification.verified_with);
 console.log("explain:", explanation.summary);
+```
+
+If you are running from the repo without installing the package, use:
+
+```js
+import { UnfractaSDK, Policy } from "./dist/index.js";
 ```
 
 ## Expected output (shape)
@@ -165,3 +170,12 @@ If PQ is unavailable, signing will fail closed as expected.
 - SDK contract: `docs/05_SDK_CONTRACT.md`
 - Demo flow: `docs/04_DEMO_SCRIPT.md`
 - Benchmarks: `docs/BENCHMARKS.md`
+- External example: `examples/hello-service`
+
+Run the external example:
+
+```bash
+cd examples/hello-service
+npm install
+npm start
+```

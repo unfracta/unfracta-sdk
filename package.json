@@ -5,6 +5,19 @@
   "type": "module",
   "description": "Policy-driven signing SDK for continuity of trust across pre- and post-quantum environments.",
   "license": "UNLICENSED",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
   "engines": {
     "node": ">=22"
   },
@@ -17,6 +30,9 @@
     "audit:record": "node scripts/audit-record.mjs",
     "env:check": "node scripts/verify-env.mjs",
     "diligence:bundle": "npm run audit:prepare && node scripts/diligence-bundle.mjs",
+    "prepare": "npm run build",
+    "prepack": "npm run build",
+    "pack:tarball": "npm pack",
     "test": "vitest run",
     "sbom": "npx --yes @cyclonedx/cyclonedx-npm --output-file sbom.cdx.json --output-format json"
   },
