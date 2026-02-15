@@ -16,6 +16,7 @@
     "audit:prepare": "node scripts/audit-prepare.mjs",
     "audit:record": "node scripts/audit-record.mjs",
     "env:check": "node scripts/verify-env.mjs",
+    "diligence:bundle": "npm run audit:prepare && node scripts/diligence-bundle.mjs",
     "test": "vitest run",
     "sbom": "npx --yes @cyclonedx/cyclonedx-npm --output-file sbom.cdx.json --output-format json"
   },

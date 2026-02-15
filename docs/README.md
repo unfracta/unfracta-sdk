@@ -8,6 +8,7 @@ materials in this repository.
 - `01_DOCTRINE.md` — What Unfracta is, is not, and the core problem framing.
 - `02_POLICY_MODEL.md` — Canonical policy definitions and behavior.
 - `05_SDK_CONTRACT.md` — Public SDK interface and envelope contract.
+- `API.md` — Reference view of the public API surface.
 
 ## Supporting references
 
@@ -25,3 +26,4 @@ materials in this repository.
 - `AUDIT_TRAIL.md` — Commit-to-artifact log for diligence.
 - `../CHANGELOG.md` — Human-readable change history.
   - Audit workflow: `npm run audit:prepare` and `npm run audit:record` (supports `UNFRACTA_AUDIT_TAG`).
+  - Diligence bundle: `npm run diligence:bundle` (writes to `releases/`).

@@ -85,6 +85,20 @@ explain: Classical and post-quantum signing will be executed.
 If PQ is unavailable, you should see a classical-only plan and a classical
 verification path.
 
+## Policy migration (no code change)
+
+The payload and SDK call stay identical. Only the policy changes:
+
+```js
+// Legacy-only → Hybrid → PQ-only
+const context = { policy: Policy.LEGACY_REQUIRED };
+// const context = { policy: Policy.HYBRID_PREFERRED };
+// const context = { policy: Policy.PQ_REQUIRED };
+```
+
+This illustrates the governance layer: policy changes drive cryptographic
+behavior without application code changes.
+
 ## Five-minute policy paths
 
 Use the same snippet above and only change the policy line.

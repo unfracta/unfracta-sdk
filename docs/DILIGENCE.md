@@ -68,6 +68,16 @@ git commit -m "Record audit trail entry"
 git push origin v0.1.0-alpha.2
 ```
 
+## Diligence bundle (one command)
+
+```bash
+npm run diligence:bundle
+```
+
+This generates a timestamped folder under `releases/` containing the latest
+diligence artifacts plus a `MANIFEST.md`. If `tar` is available, it also creates
+a `.tar.gz` archive alongside the folder.
+
 ## Licenses
 
 Third-party licensing details are documented in `docs/DEPENDENCIES.md`.

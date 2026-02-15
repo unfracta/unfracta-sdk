@@ -223,3 +223,5 @@ For build/test, SBOM generation, and licensing references, see:
 - `docs/DEPENDENCIES.md`
 - `docs/AUDIT_TRAIL.md`
 - `CHANGELOG.md`
+
+For a one-command diligence package, run `npm run diligence:bundle`.
