@@ -1,1 +1,0 @@
-cmd_Release/oqs_backend.node := c++ -bundle -undefined dynamic_lookup -Wl,-search_paths_first -mmacosx-version-min=13.5 -arch arm64 -L./Release -stdlib=libc++  -o Release/oqs_backend.node Release/obj.target/oqs_backend/oqs_backend.o -L/opt/homebrew/lib -loqs
