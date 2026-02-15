@@ -19,3 +19,11 @@ const explanation = sdk.explain(context);
 console.log("plan:", envelope.execution);
 console.log("verify:", verification.valid, verification.verified_with);
 console.log("explain:", explanation.summary);
+
+if (!envelope.execution.doPostQuantum) {
+  console.log("");
+  console.log("post-quantum: unavailable");
+  console.log("To enable PQ signing:");
+  console.log("  brew install liboqs");
+  console.log("  cd native/oqs && npm install && cd ../..");
+}

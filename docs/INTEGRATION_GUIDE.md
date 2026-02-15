@@ -47,6 +47,17 @@ If the native backend is not available:
 - `PQ_PREFERRED` falls back to classical
 - `PQ_REQUIRED` fails closed (no signing path)
 
+To see PQ enabled in the external example:
+
+```bash
+brew install liboqs
+cd native/oqs
+npm install
+cd ../..
+cd examples/hello-service
+npm start
+```
+
 ## Minimal usage (package import)
 
 ```js
