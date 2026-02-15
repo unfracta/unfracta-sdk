@@ -1,0 +1,68 @@
+{
+  "timestamp": "2026-02-15T20:56:33.589Z",
+  "node": "v24.13.0",
+  "platform": "darwin",
+  "arch": "arm64",
+  "payload_bytes": 211,
+  "pq_only_supported": true,
+  "iterations": {
+    "sign": 50,
+    "verify": 200
+  },
+  "results": [
+    {
+      "name": "sign_classical",
+      "iterations": 50,
+      "total_ms": 1.924,
+      "avg_ms": 0.038482,
+      "median_ms": 0.035875,
+      "p95_ms": 0.059959,
+      "ops_per_sec": 25986.4
+    },
+    {
+      "name": "verify_classical",
+      "iterations": 200,
+      "total_ms": 14.183,
+      "avg_ms": 0.070913,
+      "median_ms": 0.063458,
+      "p95_ms": 0.0825,
+      "ops_per_sec": 14101.88
+    },
+    {
+      "name": "sign_hybrid",
+      "iterations": 50,
+      "total_ms": 12.384,
+      "avg_ms": 0.24768,
+      "median_ms": 0.211584,
+      "p95_ms": 0.425333,
+      "ops_per_sec": 4037.47
+    },
+    {
+      "name": "verify_hybrid",
+      "iterations": 200,
+      "total_ms": 9.281,
+      "avg_ms": 0.046403,
+      "median_ms": 0.044542,
+      "p95_ms": 0.05475,
+      "ops_per_sec": 21550.26
+    },
+    {
+      "name": "sign_pq_only",
+      "iterations": 50,
+      "total_ms": 8.614,
+      "avg_ms": 0.172285,
+      "median_ms": 0.136083,
+      "p95_ms": 0.421208,
+      "ops_per_sec": 5804.34
+    },
+    {
+      "name": "verify_pq_only",
+      "iterations": 200,
+      "total_ms": 9.58,
+      "avg_ms": 0.047899,
+      "median_ms": 0.045417,
+      "p95_ms": 0.050292,
+      "ops_per_sec": 20877.1
+    }
+  ]
+}
