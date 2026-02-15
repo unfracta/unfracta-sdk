@@ -241,3 +241,22 @@ Environment:
 | sign_pq_only | 0.187104 | 0.119792 | 0.477459 | 5344.62 |
 | verify_pq_only | 0.05251 | 0.044875 | 0.095917 | 19043.98 |
 
+
+## Snapshot 2026-02-15T21:24:30.656Z
+
+- Output: `benchmarks/bench-2026-02-15T21-24-30-656Z.json`
+- Node: v24.13.0
+- Platform: darwin arm64
+- Payload: 211 bytes
+- PQ-only supported: yes
+- Iterations: sign 50, verify 200
+
+| Operation | avg ms | median ms | p95 ms | ops/sec |
+| --- | --- | --- | --- | --- |
+| sign_classical | 0.067701 | 0.03825 | 0.297916 | 14770.87 |
+| verify_classical | 0.090712 | 0.060208 | 0.19675 | 11023.89 |
+| sign_hybrid | 1.233197 | 0.245333 | 0.8355 | 810.9 |
+| verify_hybrid | 0.052468 | 0.045083 | 0.091417 | 19059.11 |
+| sign_pq_only | 0.224996 | 0.183208 | 0.470542 | 4444.51 |
+| verify_pq_only | 0.045734 | 0.044458 | 0.045709 | 21865.48 |
+
