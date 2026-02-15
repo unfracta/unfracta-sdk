@@ -57,6 +57,15 @@ Third-party licensing details are documented in `docs/DEPENDENCIES.md`.
 
 GitHub Actions workflow: `.github/workflows/ci.yml`
 
+## Release tags (optional)
+
+Tagging milestones makes diligence reviews faster.
+
+```bash
+git tag -a v0.1.0-alpha.1 -m "Diligence baseline"
+git push origin v0.1.0-alpha.1
+```
+
 ## Code Ownership
 
 Repository code is proprietary and UNLICENSED unless explicitly stated.

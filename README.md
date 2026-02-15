@@ -215,3 +215,5 @@ For build/test, SBOM generation, and licensing references, see:
 
 - `docs/DILIGENCE.md`
 - `docs/DEPENDENCIES.md`
+- `docs/AUDIT_TRAIL.md`
+- `CHANGELOG.md`

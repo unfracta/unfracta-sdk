@@ -22,3 +22,5 @@ materials in this repository.
 - `DILIGENCE.md` — Build/test/demo/bench commands.
 - `DEPENDENCIES.md` — License references and dependency notes.
 - `BENCHMARKS.md` — Performance baselines and benchmark snapshots.
+- `AUDIT_TRAIL.md` — Commit-to-artifact log for diligence.
+- `../CHANGELOG.md` — Human-readable change history.
