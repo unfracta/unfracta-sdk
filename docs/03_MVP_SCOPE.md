@@ -3,12 +3,13 @@
 ## MVP Capabilities (In Scope)
 
 1. Unified signing & verification interface
-2. Policy-driven execution: `legacy_required`, `hybrid_preferred`, `pq_preferred`
+2. Policy-driven execution for the MVP policy set (see `02_POLICY_MODEL.md`)
 3. Legacy signatures: generate + verify
 4. Post-quantum signatures: generate + verify
 5. Hybrid signing: classical + PQ together
-6. Seamless transition: no re-signing, no code changes, no ecosystem coordination
-7. Signature metadata & provenance: explainability for audits and disputes
+6. PQ-only end state (`pq_required`) with fail-closed behavior
+7. Seamless transition: no re-signing, no code changes, no ecosystem coordination
+8. Signature metadata & provenance: explainability for audits and disputes
 
 ## Explicit Non-Goals (Out of Scope)
 

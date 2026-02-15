@@ -31,11 +31,7 @@ Not a priority:
 Unfracta is a policy-driven cryptographic control plane for signing systems.
 It sits above algorithms and below application logic.
 
-It is not:
-- A crypto library
-- A PQ experiment
-- A wallet
-- A blockchain protocol
+Canonical definition of what Unfracta is and is not: `01_DOCTRINE.md`.
 
 ## Core Value Proposition
 

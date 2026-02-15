@@ -34,15 +34,31 @@ Unfracta does not attempt to define cryptographic standards or policy. It implem
 
 ---
 
-## Core Problem Statement
+## Problem Framing
 
-Digital trust infrastructure cannot migrate overnight. Cryptographic risk, however, is already moving.
+Post-quantum cryptography is not a single upgrade. It is a long transition where
+systems must remain trustworthy while capabilities differ across time,
+platforms, and organisations.
+
+Real-world environments often include:
+- Legacy verifiers that cannot parse or validate post-quantum signatures
+- Mixed runtimes (some services upgraded, others not)
+- Long-lived signatures that must remain verifiable for years
+- Incremental, policy-driven migrations rather than “flag-day” cutovers
 
 Organisations face a structural dilemma:
-- Moving too early to post-quantum cryptography risks breaking operations, interoperability, and legal validity
+- Moving too early to post-quantum cryptography risks breaking operations,
+  interoperability, and legal validity
 - Moving too late risks future compromise and emergency migration
 
-The real problem is not algorithm selection. It is **surviving the transition without breaking trust**.
+The missing layer is decision governance:
+- deciding what to sign with (and when),
+- based on an environment’s capabilities,
+- while preserving continuity of trust,
+- with decisions that are deterministic and auditable.
+
+The real problem is not algorithm selection. It is **surviving the transition
+without breaking trust**.
 
 ---
 
