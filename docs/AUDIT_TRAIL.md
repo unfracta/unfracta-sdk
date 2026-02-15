@@ -4,9 +4,10 @@ This log links repository states to diligence artifacts for verification.
 
 ## How to add a new entry
 
-1. Run `npm run sbom`.
-2. Run `npm run bench` (optional but recommended).
-3. Commit changes and add a row below with the commit hash and artifact paths.
+1. Run `npm run audit:prepare` to generate `sbom.cdx.json` and benchmarks.
+2. Commit the artifacts (SBOM + benchmark JSON + `docs/BENCHMARKS.md`).
+3. Run `npm run audit:record` to append a new row using the current commit.
+4. Commit the updated audit trail.
 
 ## Entries
 

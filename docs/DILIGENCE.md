@@ -49,6 +49,18 @@ npm run sbom
 
 The output is written to `sbom.cdx.json`.
 
+## Audit trail workflow
+
+```bash
+npm run audit:prepare
+git add sbom.cdx.json benchmarks/ docs/BENCHMARKS.md
+git commit -m "Update SBOM and benchmark snapshots"
+
+npm run audit:record
+git add docs/AUDIT_TRAIL.md
+git commit -m "Record audit trail entry"
+```
+
 ## Licenses
 
 Third-party licensing details are documented in `docs/DEPENDENCIES.md`.
