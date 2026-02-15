@@ -160,6 +160,19 @@ npm run demo
 npm run bench
 ```
 
+Note: `npm run demo` runs a build first to keep `dist/` up to date.
+
+## Hello example
+
+Run a minimal signing example:
+
+```bash
+npm run hello
+```
+
+This executes `scripts/hello.mjs` and prints the execution plan, verification
+result, and a short explanation.
+
 ## Post-quantum backend (optional, required for PQ policies)
 
 PQ features use liboqs via a native addon. To enable PQ signing:

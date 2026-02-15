@@ -30,6 +30,8 @@ npm run bench
 
 Benchmark output is captured in `docs/BENCHMARKS.md`.
 
+Note: `npm run demo` runs a build first to keep `dist/` up to date.
+
 ## SBOM
 
 Generate a CycloneDX SBOM:
