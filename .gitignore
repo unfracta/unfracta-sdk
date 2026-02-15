@@ -17,3 +17,4 @@ native/oqs/package-lock.json
 
 # OS
 .DS_Store
+unfracta-sdk-*.tgz
