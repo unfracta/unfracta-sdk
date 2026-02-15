@@ -3,6 +3,9 @@
 ## Purpose
 This doctrine defines the non-negotiable principles, scope, and intent of Unfracta. It exists to preserve architectural clarity, prevent drift, and ensure that all future design, implementation, and commercial decisions reinforce the same core proposition.
 
+This is the canonical source for what Unfracta is, what it is not, and the
+problem framing. If other documents conflict, this one wins.
+
 This document is intentionally short, opinionated, and stable. It should change rarely.
 
 ---

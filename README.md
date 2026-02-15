@@ -193,6 +193,7 @@ If the native backend is not available:
 
 ## Documentation
 
+- Docs index: `docs/README.md`
 - Integration guide: `docs/INTEGRATION_GUIDE.md`
 - Policy model: `docs/02_POLICY_MODEL.md`
 - SDK contract: `docs/05_SDK_CONTRACT.md`

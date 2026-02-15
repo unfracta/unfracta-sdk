@@ -3,6 +3,8 @@
 This document locks the strategic brief for Unfracta so engineering decisions
 reinforce acquisition value.
 
+If this document conflicts with `01_DOCTRINE.md`, the doctrine is authoritative.
+
 ## Target Audience (Primary Buyer Profile)
 
 Strategic acquirers, not general developers.
