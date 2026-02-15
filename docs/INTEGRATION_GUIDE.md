@@ -15,6 +15,16 @@ npm install
 npm run build
 ```
 
+## Fastest sanity check
+
+Run the included hello script (no edits required):
+
+```bash
+npm run hello
+```
+
+This prints the execution plan, verification result, and a short explanation.
+
 ## Post-quantum backend (optional)
 
 PQ signing requires the native liboqs backend. If you need PQ policies enabled:
