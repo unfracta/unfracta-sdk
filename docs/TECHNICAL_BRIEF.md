@@ -30,6 +30,12 @@ from classical to hybrid to PQ-only signing.
 - Classical + PQ support with policy-driven fallback.
 - `PQ_REQUIRED` fails closed when PQ is unavailable.
 
+## Determinism and auditability
+
+- Policy evaluation is deterministic and repeatable.
+- Execution and verification include ordered logs with rationale.
+- Output envelope includes explicit policy, timestamps, and signature metadata.
+
 ## Why teams adopt instead of building
 
 - 6–12 months saved vs implementing a safe policy layer from scratch.

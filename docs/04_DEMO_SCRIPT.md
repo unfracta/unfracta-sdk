@@ -64,3 +64,7 @@ The demo prints:
 - Verification result + log
 
 Signature bytes are summarized to keep output human-readable.
+
+Expected algorithm identifiers:
+- Classical: `ECDSA_P256`
+- Post-quantum: `oqs-ml-dsa-44`
