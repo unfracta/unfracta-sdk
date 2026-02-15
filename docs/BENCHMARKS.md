@@ -9,6 +9,8 @@ npm run build
 npm run bench
 ```
 
+Note: `npm run bench` runs a build first to keep `dist/` up to date.
+
 Optional environment overrides:
 
 ```bash
