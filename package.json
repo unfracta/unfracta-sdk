@@ -8,12 +8,16 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "demo": "node dist/demo/runDemo.js",
-    "test": "node --test dist/tests/policyEngine.test.js"
+    "bench": "node dist/bench/runBench.js",
+    "test": "vitest run",
+    "sbom": "npx --yes @cyclonedx/cyclonedx-npm --output-file sbom.cdx.json --output-format json"
   },
   "devDependencies": {
+    "@cyclonedx/cyclonedx-npm": "^4.1.2",
     "@types/node": "^22.0.0",
     "node-addon-api": "^8.5.0",
     "node-gyp": "^12.1.0",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "vitest": "latest"
   }
 }
