@@ -11,6 +11,7 @@ materials in this repository.
 
 ## Supporting references
 
+- `INTEGRATION_GUIDE.md` — Fastest path to integrate and validate behavior.
 - `03_MVP_SCOPE.md` — MVP capabilities and non-goals.
 - `04_DEMO_SCRIPT.md` — Demo flow and expected outputs.
 - `STRATEGIC_POSITIONING.md` — Engineering alignment on positioning.

@@ -10,6 +10,12 @@ npm run build
 npm test
 ```
 
+## Quick sanity check
+
+```bash
+npm run hello
+```
+
 ## Post-Quantum Backend (Optional)
 
 PQ signing requires the native liboqs backend.
