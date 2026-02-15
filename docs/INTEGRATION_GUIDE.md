@@ -58,6 +58,9 @@ cd examples/hello-service
 npm start
 ```
 
+Note: the PQ backend is native and not shipped in the npm package. It must be
+built from source in the repo before PQ policies are available.
+
 ## Minimal usage (package import)
 
 ```js

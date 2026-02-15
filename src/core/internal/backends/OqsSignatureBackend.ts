@@ -1,5 +1,7 @@
 import path from "path";
+import fs from "node:fs";
 import { createRequire } from "module";
+import { fileURLToPath } from "node:url";
 import type { SignatureBackend } from "../SignatureBackend.js";
 
 const require = createRequire(import.meta.url);
@@ -8,10 +10,37 @@ const require = createRequire(import.meta.url);
 // Native addon loader (ESM-safe)
 // -----------------------------------------------------------------------------
 
+function findPackageRoot(startDir: string): string | null {
+  let current = startDir;
+  while (true) {
+    const candidate = path.join(current, "package.json");
+    if (fs.existsSync(candidate)) {
+      return current;
+    }
+    const parent = path.dirname(current);
+    if (parent === current) {
+      return null;
+    }
+    current = parent;
+  }
+}
+
 function loadOqsAddon(): any {
+  const moduleDir = path.dirname(fileURLToPath(import.meta.url));
+  const packageRoot = findPackageRoot(moduleDir);
+
   const candidates = [
     path.resolve(process.cwd(), "native/oqs/build/Release/oqs_backend.node"),
     path.resolve(process.cwd(), "build/Release/oqs_backend.node"),
+    ...(packageRoot
+      ? [
+          path.resolve(
+            packageRoot,
+            "native/oqs/build/Release/oqs_backend.node"
+          ),
+          path.resolve(packageRoot, "build/Release/oqs_backend.node")
+        ]
+      : [])
   ];
 
   for (const p of candidates) {
