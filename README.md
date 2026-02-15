@@ -93,6 +93,9 @@ Classical + post-quantum signatures when supported.
 ### `PQ_PREFERRED`
 Post-quantum signatures preferred, with classical fallback.
 
+### `PQ_REQUIRED`
+Post-quantum signatures only. Fails closed if PQ is unsupported.
+
 Policies are enforced **centrally** and cannot be bypassed by adapters or callers.
 
 ---
@@ -119,16 +122,16 @@ This separation allows the SDK to evolve without breaking applications.
 - SDK-level contract tests  
 - Executable demo harness  
 
-**Note:** All cryptographic implementations are intentionally mocked in the MVP.
+**Note:** Cryptographic implementations are real, but key management is
+intentionally minimal (in-process keys only).
 
 ---
 
 ## What this SDK does not do (yet)
 
-- Implement real cryptographic algorithms  
-- Perform cryptographic verification  
 - Manage keys, identities, or wallets  
 - Enforce standards, profiles, or compliance regimes  
+- Provide hardware security module (HSM) integrations  
 
 These are **deliberate non-goals** for the MVP.
 
@@ -141,6 +144,7 @@ The repository includes a runnable demo that exercises the SDK across:
 - Legacy-only environments  
 - Hybrid environments  
 - Post-quantum-preferred policies with fallback  
+- PQ-only end state  
 
 **Location:**  
 `src/demo/runDemo.ts`
@@ -153,3 +157,30 @@ The repository includes a runnable demo that exercises the SDK across:
 npm install
 npm run build
 npm run demo
+npm run bench
+```
+
+## Post-quantum backend (optional, required for PQ policies)
+
+PQ features use liboqs via a native addon. To enable PQ signing:
+
+```bash
+brew install liboqs
+cd native/oqs
+npm install
+cd ../..
+```
+
+If the native backend is not available:
+- `HYBRID_PREFERRED` falls back to classical only
+- `PQ_PREFERRED` falls back to classical
+- `PQ_REQUIRED` fails closed (no signing path)
+
+---
+
+## Diligence artifacts
+
+For build/test, SBOM generation, and licensing references, see:
+
+- `docs/DILIGENCE.md`
+- `docs/DEPENDENCIES.md`

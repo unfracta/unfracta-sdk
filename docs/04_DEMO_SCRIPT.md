@@ -3,73 +3,64 @@
 ## Goal
 
 Demonstrate:
-1) legacy compatibility,
+1) policy-driven signing,
 2) post-quantum readiness,
-3) seamless transition behaviour across mixed environments.
+3) deterministic decision logs,
+4) policy migration without code changes.
 
-The demo focuses on **policy-driven signing and verification semantics**, not cryptographic correctness.
+The demo focuses on **policy-driven orchestration and auditability**.
 
 ---
 
 ## Payload
 
-"Approve benefit disbursement – Reference #847392"
+Payment instruction (JSON):
+- instruction id
+- payer / payee account ids
+- amount + currency
+- reference
+- requested_at
 
 ---
 
-## Environments
+## Demo Flow
 
-- Legacy-only verifier: post-quantum unsupported
-- Hybrid verifier: post-quantum optional
-- PQ-capable verifier: post-quantum supported
-
-Each environment evaluates the same signed envelope based on its own capabilities.
-
----
-
-## Part A — Legacy
+### Part A — Legacy Policy
 
 - `sign(payload, legacy_required)`
 - Classical signature generated
-- Post-quantum signature explicitly excluded by policy
+- Post-quantum signature excluded by policy
+- Verification succeeds using the classical path
 
-Verification behaviour:
-- All environments attempt verification
-- Legacy path remains compatible everywhere
-- Verification outcomes are explainable and refusal-safe
-
----
-
-## Part B — Hybrid
+### Part B — Hybrid Policy
 
 - `sign(payload, hybrid_preferred)`
-- Classical and post-quantum signatures generated together
+- Classical + post-quantum signatures generated together
+- Verification prefers post-quantum when available
 
-Verification behaviour:
-- Legacy-only environment ignores PQ signature and evaluates classical path
-- Hybrid and PQ-capable environments recognise both signatures
-- Verification semantics demonstrate continuity without requiring capability symmetry
+### Part C — PQ Required (End State)
+
+- `sign(payload, pq_required)`
+- Post-quantum signatures only
+- Verification uses post-quantum path exclusively
+
+### Migration Demonstration
+
+The payload and API call do not change.
+Only the policy value changes:
+
+- `legacy_required` → `hybrid_preferred` → `pq_required`
+
+This is the core governance value proposition.
 
 ---
 
-## Part C — PQ-Preferred
+## Output Expectations
 
-- `sign(payload, pq_preferred)`
-- Post-quantum signature preferred, classical retained as fallback
+The demo prints:
+- Execution plan (classical vs PQ)
+- Deterministic decision log
+- Signature metadata (algorithm ids + lengths)
+- Verification result + log
 
-Verification behaviour:
-- Legacy-only environment evaluates classical fallback path
-- PQ-capable environment prefers post-quantum path
-- No verification attempt fails solely due to lack of PQ support
-
----
-
-## Key Demonstration Outcome
-
-The same signed envelope:
-- Survives across heterogeneous environments
-- Preserves legacy trust
-- Enables post-quantum readiness
-- Requires no re-signing or code changes
-
-Cryptographic verification is intentionally mocked; the demo proves **orchestration, policy enforcement, and transition safety**.
+Signature bytes are summarized to keep output human-readable.

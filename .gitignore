@@ -3,6 +3,7 @@ node_modules/
 
 # build output
 dist/
+native/oqs/build/
 
 # environment
 .env
@@ -11,6 +12,7 @@ dist/
 # logs
 npm-debug.log*
 pnpm-debug.log*
+native/oqs/package-lock.json
 
 # OS
 .DS_Store

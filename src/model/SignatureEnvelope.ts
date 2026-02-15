@@ -1,5 +1,7 @@
 import type { Policy } from "../policy/Policy.js";
 import type { ExecutionPlan } from "../core/PolicyEngine.js";
+import type { ExecutionStep } from "./ExecutionStep.js";
+import type { SignatureEntry } from "./SignatureEntry.js";
 
 export interface SignatureEnvelope {
   /**
@@ -18,13 +20,22 @@ export interface SignatureEnvelope {
   execution: ExecutionPlan;
 
   /**
+   * Flat execution log for SDK consumers.
+   */
+  execution_log: ExecutionStep[];
+
+  /**
    * Signatures produced during execution.
    */
-  signatures: Record<string, unknown>;
+  signatures: SignatureEntry[];
 
   /**
    * Creation timestamp (ISO-8601).
    */
-  createdAt: string;
-}
+  created_at: string;
 
+  /**
+   * Legacy camelCase timestamp for backward compatibility.
+   */
+  createdAt?: string;
+}

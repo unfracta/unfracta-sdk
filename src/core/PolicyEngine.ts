@@ -36,8 +36,9 @@ export class PolicyEngine {
         : "Post-quantum cryptography is not supported."
     });
 
-    // 3. Classical is a hard requirement for MVP continuity
-    if (!caps.classicalSupported) {
+    // 3. Classical is a hard requirement unless policy explicitly requires PQ only.
+    const classicalRequired = policy !== Policy.PQ_REQUIRED;
+    if (!caps.classicalSupported && classicalRequired) {
       log.push({
         step: "execution_decision",
         outcome: "failure",
@@ -127,6 +128,38 @@ export class PolicyEngine {
         });
 
         return { doClassical: true, doPostQuantum: false, log };
+      }
+
+      case Policy.PQ_REQUIRED: {
+        if (caps.postQuantumSupported) {
+          log.push({
+            step: "post_quantum_policy",
+            outcome: "success",
+            reason: "Policy requires post-quantum signing."
+          });
+
+          log.push({
+            step: "execution_decision",
+            outcome: "success",
+            reason: "Executing post-quantum signing only."
+          });
+
+          return { doClassical: false, doPostQuantum: true, log };
+        }
+
+        log.push({
+          step: "post_quantum_policy",
+          outcome: "failure",
+          reason: "Policy requires PQ, but PQ is unsupported in this environment."
+        });
+
+        log.push({
+          step: "execution_decision",
+          outcome: "failure",
+          reason: "No valid execution path: post-quantum is required."
+        });
+
+        return { doClassical: false, doPostQuantum: false, log };
       }
 
       default: {

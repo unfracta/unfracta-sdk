@@ -36,7 +36,7 @@ export class OqsSignatureBackend implements SignatureBackend {
   public readonly id = "oqs-ml-dsa-44";
 
   private readonly oqs: any;
-  private readonly publicKey: Buffer;
+  private readonly publicKeyBytes: Buffer;
   private readonly secretKey: Buffer;
 
   constructor() {
@@ -47,8 +47,12 @@ export class OqsSignatureBackend implements SignatureBackend {
       throw new Error("OQS keypair generation failed");
     }
 
-    this.publicKey = kp.publicKey;
+    this.publicKeyBytes = kp.publicKey;
     this.secretKey = kp.secretKey;
+  }
+
+  publicKey(): Uint8Array {
+    return Uint8Array.from(this.publicKeyBytes);
   }
 
   sign(payload: Uint8Array): Uint8Array {
@@ -59,12 +63,17 @@ export class OqsSignatureBackend implements SignatureBackend {
     return new Uint8Array(sig);
   }
 
-  verify(payload: Uint8Array, signature: Uint8Array): boolean {
+  verify(
+    payload: Uint8Array,
+    signature: Uint8Array,
+    publicKey?: Uint8Array
+  ): boolean {
+    const key = publicKey ? Buffer.from(publicKey) : this.publicKeyBytes;
     return Boolean(
       this.oqs.verifyMLDSA44(
         Buffer.from(payload),
         Buffer.from(signature),
-        this.publicKey
+        key
       )
     );
   }

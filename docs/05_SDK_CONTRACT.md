@@ -15,8 +15,10 @@ Contextual data may be embedded in the signature envelope but is not part of the
 - `legacy_required`
 - `hybrid_preferred`
 - `pq_preferred`
+- `pq_required`
 
 Policy selection determines signing behaviour. Cryptographic algorithms are not user-selectable.
+`pq_required` fails closed if post-quantum support is unavailable.
 
 ---
 
@@ -33,6 +35,15 @@ Required fields:
 
 Optional fields:
 - `context` — caller-supplied metadata preserved with the envelope
+
+## SignatureEntry (required fields)
+
+- `algorithm_family` — `classical` or `post_quantum`
+- `algorithm_identifier` — stable identifier for the algorithm
+- `signature_bytes` — signature bytes
+
+Optional fields:
+- `public_key` — public key bytes (required for portable PQ verification)
 
 ---
 

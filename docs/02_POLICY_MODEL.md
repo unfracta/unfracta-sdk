@@ -17,7 +17,7 @@ Unfracta is solely responsible for mapping policy to cryptographic execution bas
 
 ## Policy Set (MVP – Frozen)
 
-Exactly **three policies** are supported in the MVP.
+Exactly **four policies** are supported in the MVP.
 
 ---
 
@@ -66,6 +66,23 @@ Support environments preparing for post-quantum dominance while retaining contin
 ### Explicitly Forbidden
 - PQ-only signatures without explicit policy intent
 - Breaking verification in legacy environments
+
+---
+
+## 4. `pq_required`
+
+### Intent
+Represent the end-state where post-quantum cryptography is mandatory and
+legacy signatures are no longer acceptable.
+
+### Behaviour
+- Post-quantum signatures only
+- Fails closed if post-quantum support is unavailable
+- No classical fallback path
+
+### Explicitly Forbidden
+- Emitting classical signatures
+- Silent downgrade to hybrid or legacy policies
 
 ---
 

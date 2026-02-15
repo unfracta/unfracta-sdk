@@ -80,9 +80,7 @@ This design intentionally keeps cryptographic evolution isolated and additive.
 ## Current Backends
 
 - Classical (Node.js crypto, ECDSA P-256)
-
-Post-quantum backends will be introduced incrementally using NIST-standardised
-algorithms and well-known reference implementations.
+- Post-quantum (liboqs native backend, ML-DSA-44)
 
 ---
 

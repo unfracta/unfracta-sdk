@@ -18,11 +18,9 @@ function runSigningAdapterContract(
       expect(signature).toBeInstanceOf(Uint8Array);
     });
 
-    it("is deterministic for the same input", () => {
-      const sig1 = adapter.sign(profile, payload);
-      const sig2 = adapter.sign(profile, payload);
-
-      expect(sig1).toEqual(sig2);
+    it("returns a non-empty signature", () => {
+      const signature = adapter.sign(profile, payload);
+      expect(signature.length).toBeGreaterThan(0);
     });
 
     it("does not mutate the input payload", () => {

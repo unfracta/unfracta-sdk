@@ -10,6 +10,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "node-addon-api": "^8.5.0"
+  },
   "type": "commonjs",
   "gypfile": true
 }
