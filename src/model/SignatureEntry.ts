@@ -8,4 +8,8 @@ export interface SignatureEntry {
    * Optional public key bytes (required for portable PQ verification).
    */
   public_key?: Uint8Array;
+  /**
+   * Optional external key identifier (for KMS or vault integrations).
+   */
+  key_id?: string;
 }

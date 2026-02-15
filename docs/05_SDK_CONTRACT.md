@@ -32,6 +32,7 @@ Required fields:
 - `created_at` — timestamp of signature creation
 - `signatures[]` — one or more signature entries
 - `execution_log[]` — ordered log of policy evaluation and execution decisions
+ - `execution` — boolean plan summary (classical vs post-quantum)
 
 Optional fields:
 - `context` — caller-supplied metadata preserved with the envelope
@@ -44,6 +45,7 @@ Optional fields:
 
 Optional fields:
 - `public_key` — public key bytes (required for portable PQ verification)
+- `key_id` — optional identifier for external key management systems
 
 ---
 
