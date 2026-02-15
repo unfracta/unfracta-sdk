@@ -71,10 +71,13 @@ const copied = [];
 const coreFiles = [
   "README.md",
   "CHANGELOG.md",
+  "SECURITY.md",
   "sbom.cdx.json",
   "package.json",
   "docs/README.md",
   "docs/TECHNICAL_BRIEF.md",
+  "docs/TECHNICAL_AUDIT.md",
+  "docs/API.md",
   "docs/INTEGRATION_GUIDE.md",
   "docs/02_POLICY_MODEL.md",
   "docs/04_DEMO_SCRIPT.md",

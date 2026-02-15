@@ -55,6 +55,16 @@ npm run sbom
 
 The output is written to `sbom.cdx.json`.
 
+## Security posture
+
+```bash
+npm audit --omit=dev
+npm audit
+npm audit --json > audit-report.json
+```
+
+The latest audit report is stored at `audit-report.json`.
+
 ## Audit trail workflow
 
 ```bash

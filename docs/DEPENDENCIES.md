@@ -13,6 +13,10 @@ find their license text. For full transitive coverage, see `sbom.cdx.json`.
 - Note: liboqs includes third-party components; see the upstream subfolders for
   their specific licenses.
 
+Update cadence:
+- Review liboqs quarterly or when NIST PQC guidance changes.
+- Update with `brew upgrade liboqs`, then rebuild `native/oqs`.
+
 ## Node Dependencies
 
 ### node-addon-api

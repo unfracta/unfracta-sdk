@@ -28,3 +28,4 @@ materials in this repository.
 - `../CHANGELOG.md` — Human-readable change history.
   - Audit workflow: `npm run audit:prepare` and `npm run audit:record` (supports `UNFRACTA_AUDIT_TAG`).
   - Diligence bundle: `npm run diligence:bundle` (writes to `releases/`).
+- `../SECURITY.md` — Security reporting policy.
