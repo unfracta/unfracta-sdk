@@ -6,6 +6,8 @@ const AUDIT_PATH = "docs/AUDIT_TRAIL.md";
 const SBOM_PATH = "sbom.cdx.json";
 const BENCH_DIR = process.env.UNFRACTA_BENCH_DIR ?? "benchmarks";
 const TAG = process.env.UNFRACTA_AUDIT_TAG;
+const TAG_MESSAGE =
+  process.env.UNFRACTA_AUDIT_TAG_MESSAGE ?? "Audit cycle";
 
 function execText(cmd, args) {
   const result = spawnSync(cmd, args, { encoding: "utf8" });
@@ -56,5 +58,24 @@ if (dividerIndex === -1) {
 
 lines.splice(dividerIndex + 1, 0, row);
 fs.writeFileSync(AUDIT_PATH, `${lines.join("\n")}\n`);
+
+if (TAG) {
+  const tagExists = spawnSync(
+    "git",
+    ["rev-parse", "-q", "--verify", `refs/tags/${TAG}`]
+  );
+  if (tagExists.status === 0) {
+    console.warn(`Tag ${TAG} already exists. Skipping tag creation.`);
+  } else {
+    const message = `${TAG_MESSAGE} (${date})`;
+    const tagResult = spawnSync("git", ["tag", "-a", TAG, "-m", message], {
+      stdio: "inherit"
+    });
+    if (tagResult.status !== 0) {
+      throw new Error(`Failed to create tag ${TAG}.`);
+    }
+    console.log(`Created tag ${TAG}.`);
+  }
+}
 
 console.log(`Audit trail updated with ${benchFile} and ${SBOM_PATH}.`);

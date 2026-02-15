@@ -56,9 +56,10 @@ npm run audit:prepare
 git add sbom.cdx.json benchmarks/ docs/BENCHMARKS.md
 git commit -m "Update SBOM and benchmark snapshots"
 
-npm run audit:record
+UNFRACTA_AUDIT_TAG=v0.1.0-alpha.2 npm run audit:record
 git add docs/AUDIT_TRAIL.md
 git commit -m "Record audit trail entry"
+git push origin v0.1.0-alpha.2
 ```
 
 ## Licenses

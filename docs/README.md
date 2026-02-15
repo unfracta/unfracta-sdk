@@ -24,4 +24,4 @@ materials in this repository.
 - `BENCHMARKS.md` — Performance baselines and benchmark snapshots.
 - `AUDIT_TRAIL.md` — Commit-to-artifact log for diligence.
 - `../CHANGELOG.md` — Human-readable change history.
-  - Audit workflow: `npm run audit:prepare` and `npm run audit:record`.
+  - Audit workflow: `npm run audit:prepare` and `npm run audit:record` (supports `UNFRACTA_AUDIT_TAG`).
