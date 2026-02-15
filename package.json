@@ -15,6 +15,7 @@
     "bench": "npm run build && node dist/bench/runBench.js",
     "audit:prepare": "node scripts/audit-prepare.mjs",
     "audit:record": "node scripts/audit-record.mjs",
+    "env:check": "node scripts/verify-env.mjs",
     "test": "vitest run",
     "sbom": "npx --yes @cyclonedx/cyclonedx-npm --output-file sbom.cdx.json --output-format json"
   },

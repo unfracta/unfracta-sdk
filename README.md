@@ -177,6 +177,12 @@ npm run hello
 This executes `scripts/hello.mjs` and prints the execution plan, verification
 result, and a short explanation.
 
+Optional environment check:
+
+```bash
+npm run env:check
+```
+
 ## Post-quantum backend (optional, required for PQ policies)
 
 PQ features use liboqs via a native addon. To enable PQ signing:

@@ -25,6 +25,12 @@ npm run hello
 
 This prints the execution plan, verification result, and a short explanation.
 
+Optional environment validation:
+
+```bash
+npm run env:check
+```
+
 ## Post-quantum backend (optional)
 
 PQ signing requires the native liboqs backend. If you need PQ policies enabled:

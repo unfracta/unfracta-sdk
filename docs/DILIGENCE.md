@@ -16,6 +16,12 @@ npm test
 npm run hello
 ```
 
+Optional environment validation:
+
+```bash
+npm run env:check
+```
+
 ## Post-Quantum Backend (Optional)
 
 PQ signing requires the native liboqs backend.
