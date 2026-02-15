@@ -78,12 +78,59 @@ console.log("explain:", explanation.summary);
 
 ```text
 plan: { doClassical: true, doPostQuantum: true, ... }
-verify: true oqs_ml_dsa_44
+verify: true oqs-ml-dsa-44
 explain: Classical and post-quantum signing will be executed.
 ```
 
 If PQ is unavailable, you should see a classical-only plan and a classical
 verification path.
+
+## Five-minute policy paths
+
+Use the same snippet above and only change the policy line.
+
+### Legacy-only (no PQ required)
+
+```js
+const context = { policy: Policy.LEGACY_REQUIRED };
+```
+
+Expected output shape:
+
+```text
+plan: { doClassical: true, doPostQuantum: false, ... }
+verify: true ECDSA_P256
+```
+
+### Hybrid (PQ when available)
+
+```js
+const context = { policy: Policy.HYBRID_PREFERRED };
+```
+
+Expected output shape (PQ available):
+
+```text
+plan: { doClassical: true, doPostQuantum: true, ... }
+verify: true oqs-ml-dsa-44
+```
+
+If PQ is unavailable, the verification line should show `ECDSA_P256`.
+
+### PQ-only (end state)
+
+```js
+const context = { policy: Policy.PQ_REQUIRED };
+```
+
+Expected output shape:
+
+```text
+plan: { doClassical: false, doPostQuantum: true, ... }
+verify: true oqs-ml-dsa-44
+```
+
+If PQ is unavailable, signing will fail closed as expected.
 
 ## Policy quick reference
 
