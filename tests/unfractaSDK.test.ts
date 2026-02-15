@@ -7,13 +7,23 @@ describe("UnfractaSDK signing and verification", () => {
     const sdk = new UnfractaSDK();
     const payload = new Uint8Array([1, 2, 3, 4]);
 
-    const envelope = sdk.sign(payload, { policy: Policy.HYBRID_PREFERRED });
-    const plan = sdk.plan({ policy: Policy.HYBRID_PREFERRED });
+    const context = { policy: Policy.HYBRID_PREFERRED };
+    const envelope = sdk.sign(payload, context);
+    const plan = sdk.plan(context);
 
     expect(envelope.version).toBe("v1");
     expect(envelope.created_at).toBeTruthy();
     expect(envelope.execution_log.length).toBeGreaterThan(0);
     expect(envelope.signatures.length).toBeGreaterThan(0);
+    expect(envelope.execution).toEqual(plan.execution);
+    expect(envelope.execution_log).toEqual(plan.execution.log);
+
+    const logSteps = envelope.execution_log.map(step => step.step);
+    expect(logSteps.slice(0, 3)).toEqual([
+      "policy_evaluated",
+      "classical_capability",
+      "post_quantum_capability"
+    ]);
 
     const pq = envelope.signatures.find(
       sig => sig.algorithm_family === "post_quantum"
@@ -26,6 +36,7 @@ describe("UnfractaSDK signing and verification", () => {
     const verification = sdk.verify(payload, envelope);
     expect(verification.valid).toBe(true);
     expect(verification.verification_log.length).toBeGreaterThan(0);
+    expect(verification.verification_log[0].step).toBe("verification_policy");
   });
 
   it("enforces PQ_REQUIRED when supported", () => {

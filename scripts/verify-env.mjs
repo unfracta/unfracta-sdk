@@ -2,7 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 
 const minMajor = 22;
-const version = process.versions.node;
+const override = process.env.UNFRACTA_NODE_VERSION_OVERRIDE;
+const version = override ?? process.versions.node;
 const major = Number(version.split(".")[0]);
 
 const distPath = path.join("dist");
