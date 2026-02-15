@@ -1,5 +1,7 @@
 import { UnfractaSDK } from "../core/UnfractaSDK.js";
 import { Policy } from "../policy/Policy.js";
+import fs from "node:fs";
+import path from "node:path";
 
 type BenchResult = {
   name: string;
@@ -121,4 +123,52 @@ const report = {
   results
 };
 
+const OUTPUT_DIR = process.env.UNFRACTA_BENCH_OUTDIR ?? "benchmarks";
+const SUMMARY_PATH =
+  process.env.UNFRACTA_BENCH_SUMMARY ?? "docs/BENCHMARKS.md";
+
+function toSafeTimestamp(timestamp: string): string {
+  return timestamp.replace(/[:.]/g, "-");
+}
+
+function writeReportToDisk() {
+  fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+  const safeTimestamp = toSafeTimestamp(report.timestamp);
+  const filename = `bench-${safeTimestamp}.json`;
+  const outFile = path.join(OUTPUT_DIR, filename);
+
+  fs.writeFileSync(outFile, JSON.stringify(report, null, 2));
+  appendSummary(SUMMARY_PATH, outFile);
+}
+
+function appendSummary(summaryPath: string, outFile: string) {
+  const summaryLines: string[] = [];
+
+  summaryLines.push("");
+  summaryLines.push(`## Snapshot ${report.timestamp}`);
+  summaryLines.push("");
+  summaryLines.push(`- Output: \`${outFile}\``);
+  summaryLines.push(`- Node: ${report.node}`);
+  summaryLines.push(`- Platform: ${report.platform} ${report.arch}`);
+  summaryLines.push(`- Payload: ${report.payload_bytes} bytes`);
+  summaryLines.push(
+    `- PQ-only supported: ${report.pq_only_supported ? "yes" : "no"}`
+  );
+  summaryLines.push(
+    `- Iterations: sign ${report.iterations.sign}, verify ${report.iterations.verify}`
+  );
+  summaryLines.push("");
+  summaryLines.push("| Operation | avg ms | median ms | p95 ms | ops/sec |");
+  summaryLines.push("| --- | --- | --- | --- | --- |");
+  for (const result of report.results) {
+    summaryLines.push(
+      `| ${result.name} | ${result.avg_ms} | ${result.median_ms} | ${result.p95_ms} | ${result.ops_per_sec} |`
+    );
+  }
+  summaryLines.push("");
+
+  fs.appendFileSync(summaryPath, `${summaryLines.join("\n")}\n`);
+}
+
+writeReportToDisk();
 console.log(JSON.stringify(report, null, 2));

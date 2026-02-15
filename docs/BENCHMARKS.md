@@ -26,7 +26,8 @@ The benchmark prints JSON to stdout, including:
 - Separate entries for classical and hybrid (PQ) paths
 - PQ-only results when supported
 
-Capture the output and paste it into this document for diligence.
+The benchmark also writes a timestamped JSON file into `benchmarks/` and
+appends a short summary to this document for each run.
 
 ## Latest Results (Local Baseline)
 
